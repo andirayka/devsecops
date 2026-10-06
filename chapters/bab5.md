@@ -43,7 +43,7 @@ Risiko utama ialah credential environment dapat dibaca melalui Docker, backup ha
 
 Rincian hasil perintah tersimpan di `evidence/bab5/runtime-results.txt` dan `evidence/bab5/restore-results.txt`.
 
-**Pernyataan penggunaan AI:** Saya menggunakan AI untuk mengelompokkan hasil dan menyusun analisis risiko. Saya membandingkan setiap klaim dengan hasil skrip, query PostgreSQL, dan dashboard pgAdmin.
+**Pernyataan penggunaan AI:** Saya menggunakan AI untuk implementasi praktikum. Saya menganalisis hasil implementasi dan belajar melalui tanya jawab dengan AI.
 
 ## Evaluasi dan Latihan Mandiri
 

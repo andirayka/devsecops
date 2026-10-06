@@ -1,0 +1,3 @@
+/secrets/db_password
+/backups/*.tar.gz
+/__pycache__/

@@ -1,0 +1,215 @@
+=== Praktikum Bab 2: Docker dan container ===
+Waktu: 2026-10-05 23:14:20 WIB
+Context: colima
+Client=29.8.1 Server=29.5.2
+Docker Compose version v5.5.1
+Image nginx:alpine yang tersedia: nginx@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2
+PASS preflight: 127.0.0.1:18082 tersedia.
+PASS preflight: 127.0.0.1:19092 tersedia.
+
+=== 1. Uji image hello-world ===
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (arm64v8)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+=== 2. Uji image Ubuntu ===
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.5 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+
+Arsitektur container: aarch64
+
+Identitas proses: uid=0(root) gid=0(root) groups=0(root)
+
+=== 3. Menjalankan Nginx pada loopback port 18082 ===
+1cd9ee64afb2203bd8d11eb2bf0fe07ee93ada78a161ea98ab67e8a1e5d45e19
+NAMES                  IMAGE          PORTS                     STATUS
+andi-dso-bab12-nginx   nginx:alpine   127.0.0.1:18082->80/tcp   Up Less than a second
+PASS assertion body: halaman default Nginx memuat marker "Welcome to nginx!".
+
+Respons HTTP Nginx:
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   896  100   896    0     0  1188k      0 --:--:-- --:--:-- --:--:--  875k
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Mon, 05 Oct 2026 16:14:21 GMT
+Content-Type: text/html
+Content-Length: 896
+Last-Modified: Tue, 15 Sep 2026 14:18:52 GMT
+Connection: keep-alive
+ETag: "6aa953cc-380"
+Accept-Ranges: bytes
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+Log Nginx:
+2026/10/05 16:14:21 [notice] 1#1: nginx/1.31.6
+2026/10/05 16:14:21 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/10/05 16:14:21 [notice] 1#1: OS: Linux 6.8.0-117-generic
+2026/10/05 16:14:21 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:524288
+2026/10/05 16:14:21 [notice] 1#1: start worker processes
+2026/10/05 16:14:21 [notice] 1#1: start worker process 29
+2026/10/05 16:14:21 [notice] 1#1: start worker process 30
+172.17.0.1 - - [05/Oct/2026:16:14:21 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.7.1" "-"
+172.17.0.1 - - [05/Oct/2026:16:14:21 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.7.1" "-"
+172.17.0.1 - - [05/Oct/2026:16:14:21 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.7.1" "-"
+
+=== 4. Build image kustom pens-web:1.0 ===
+#0 building with "colima" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 198B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/nginx:alpine
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 523B done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/library/nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2
+#5 resolve docker.io/library/nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2 done
+#5 CACHED
+
+#6 [2/2] COPY index.html /usr/share/nginx/html/index.html
+#6 DONE 0.0s
+
+#7 exporting to image
+#7 exporting layers 0.0s done
+#7 exporting manifest sha256:506b0c6b3ea741b0c0e41a196ecddbc3ce1308599301def68400ed87c19eada6 done
+#7 exporting config sha256:85d4668e0d7d510784c87cf1c474fddba6bada2d58401d0c00d2e97c2b2ad8a7 done
+#7 exporting attestation manifest sha256:c38867b9028146d224f49e6a946adf12b1fbd2362b218cd5f23b088472e23a3e done
+#7 exporting manifest list sha256:6780de1ab825d7cf3f867ddc953aaab041cfea411e80f25e029e9cb9b6326b30 done
+#7 naming to docker.io/library/pens-web:1.0 done
+#7 unpacking to docker.io/library/pens-web:1.0 done
+#7 DONE 0.0s
+ID=sha256:6780de1ab825d7cf3f867ddc953aaab041cfea411e80f25e029e9cb9b6326b30 OS=linux Architecture=arm64 ExposedPorts={"80/tcp":{}}
+
+=== 5. Bedakan EXPOSE dan publish ===
+b87a5912442090d22bd5e8f8ba16075c42a3c87e0b33ca69d221da8fb8082409
+ExposedPorts={"80/tcp":{}}; HostPortBindings={}; RuntimePorts={"80/tcp":null}
+Cleanup container milik praktikum: andi-dso-bab12-expose-only
+andi-dso-bab12-expose-only
+
+=== 6. Publish image kustom hanya ke loopback port 19092 ===
+79fdedcbf9332fe880d739c8f442d6b4c04b9c2edd09ca28ee7212337c239dc1
+NAMES                       IMAGE          PORTS                     STATUS
+andi-dso-bab12-custom-web   pens-web:1.0   127.0.0.1:19092->80/tcp   Up 1 second
+PASS assertion body: marker unik image pens-web:1.0 dan identitas Andi ditemukan.
+
+Respons HTTP image kustom:
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   484  100   484    0     0   265k      0 --:--:-- --:--:-- --:--:--  472k
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Mon, 05 Oct 2026 16:14:22 GMT
+Content-Type: text/html
+Content-Length: 484
+Last-Modified: Mon, 05 Oct 2026 16:13:46 GMT
+Connection: keep-alive
+ETag: "6ac3ccba-1e4"
+Accept-Ranges: bytes
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Praktikum DevSecOps — Andi</title>
+  </head>
+  <body>
+    <main>
+      <h1>Docker Lab PENS</h1>
+      <p>Image kustom <code>pens-web:1.0</code> berhasil dijalankan.</p>
+      <p>Praktikum oleh Andi Rayka C — 3123640021.</p>
+      <p id="lab-marker">DEVSECOPS-BAB2-ANDI-3123640021-PENS-WEB-1.0</p>
+    </main>
+  </body>
+</html>
+
+Log image kustom:
+2026/10/05 16:14:21 [notice] 1#1: nginx/1.31.6
+2026/10/05 16:14:21 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/10/05 16:14:21 [notice] 1#1: OS: Linux 6.8.0-117-generic
+2026/10/05 16:14:21 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:524288
+2026/10/05 16:14:21 [notice] 1#1: start worker processes
+2026/10/05 16:14:21 [notice] 1#1: start worker process 30
+2026/10/05 16:14:21 [notice] 1#1: start worker process 31
+172.17.0.1 - - [05/Oct/2026:16:14:22 +0000] "GET / HTTP/1.1" 200 484 "-" "curl/8.7.1" "-"
+172.17.0.1 - - [05/Oct/2026:16:14:22 +0000] "GET / HTTP/1.1" 200 484 "-" "curl/8.7.1" "-"
+172.17.0.1 - - [05/Oct/2026:16:14:22 +0000] "GET / HTTP/1.1" 200 484 "-" "curl/8.7.1" "-"
+
+=== Praktikum Bab 2 selesai ===
+Cleanup container milik praktikum: andi-dso-bab12-nginx
+andi-dso-bab12-nginx
+Cleanup container milik praktikum: andi-dso-bab12-custom-web
+andi-dso-bab12-custom-web
+
+Container praktikum yang masih tercatat:
+NAMES     IMAGE     STATUS
+
+Container aktif setelah cleanup:
+NAMES                IMAGE                PORTS                       STATUS
+RINGKASAN PRIVASI: 4 container di luar praktikum tetap aktif; nama, image, dan port disunting.

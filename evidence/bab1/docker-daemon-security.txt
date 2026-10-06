@@ -1,0 +1,20 @@
+Pemeriksaan privilege daemon dan konteks Docker - 2026-10-05 23:15:38 WIB
+
+Daftar context:
+NAME       DESCRIPTION                               DOCKER ENDPOINT                                       ERROR
+colima *   colima                                    unix://<HOME>/.colima/default/docker.sock   
+default    Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                           
+
+Default socket host (/var/run/docker.sock): tidak aktif/tidak tersedia
+Docker Desktop app bundle: tidak ada
+
+Context, socket, user VM, dan group:
+colima
+unix://<HOME>/.colima/default/docker.sock
+uid=501(<LOCAL_USER>) gid=1000(<LOCAL_USER>) groups=1000(<LOCAL_USER>),991(docker),999(systemd-journal)
+
+Proses daemon:
+root        1189 dockerd
+
+SecurityOptions:
+["name=apparmor","name=seccomp,profile=builtin","name=cgroupns"]

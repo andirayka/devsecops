@@ -1,0 +1,74 @@
+=== Baseline Bab 1: DevSecOps ===
+Waktu: 2026-10-05 23:08:36 WIB
+Workspace: <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab
+
+=== Host macOS ===
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+Arsitektur host: arm64
+Git host: git version 2.47.1
+OpenSSL host: OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)
+cURL host: curl 8.7.1 (x86_64-apple-darwin26.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.69.0
+
+=== Docker client dan engine ===
+Context aktif: colima
+Client=29.8.1 Server=29.5.2
+Docker Compose version v5.5.1
+Server=Ubuntu 24.04.4 LTS / aarch64; CPUs=2; MemoryBytes=4095643648
+SecurityOptions=["name=apparmor","name=seccomp,profile=builtin","name=cgroupns"]; CgroupDriver=cgroupfs; CgroupVersion=2
+
+=== VM Linux Colima ===
+time="2026-10-05T23:08:37+07:00" level=info msg="colima is running using macOS Virtualization.Framework"
+time="2026-10-05T23:08:37+07:00" level=info msg="arch: aarch64"
+time="2026-10-05T23:08:37+07:00" level=info msg="runtime: docker"
+time="2026-10-05T23:08:37+07:00" level=info msg="mountType: virtiofs"
+time="2026-10-05T23:08:37+07:00" level=info msg="docker socket: unix://<HOME>/.colima/default/docker.sock"
+time="2026-10-05T23:08:37+07:00" level=info msg="containerd socket: unix://<HOME>/.colima/default/containerd.sock"
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+Arsitektur VM: aarch64
+Akun VM: uid=501(<LOCAL_USER>) gid=1000(<LOCAL_USER>) groups=1000(<LOCAL_USER>),991(docker),999(systemd-journal)
+OpenSSL VM: OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
+cURL VM: curl 8.5.0 (aarch64-unknown-linux-gnu) libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10
+Docker Compose dalam VM: Docker Compose version v5.1.4
+Ruang filesystem VM dan Docker data: Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        19G  1.2G   18G   7% /
+/dev/vdb1       9.8G 1021M  8.3G  11% /var/lib/docker
+
+=== Struktur dan mode izin ===
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/.gitignore
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/app
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/keys
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/keys/README-placeholder.txt
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/policy
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/reports
+<HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/sbom
+drwxr-xr-x@ 8 <LOCAL_USER>  staff  256 Oct  5 23:04 <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab
+drwxr-xr-x@ 2 <LOCAL_USER>  staff   64 Oct  5 23:04 <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/app
+drwx------@ 3 <LOCAL_USER>  staff   96 Oct  5 23:04 <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/keys
+-rw-------@ 1 <LOCAL_USER>  staff  126 Oct  5 23:08 <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/keys/README-placeholder.txt
+drwxr-xr-x@ 2 <LOCAL_USER>  staff   64 Oct  5 23:04 <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/policy
+drwxr-xr-x@ 2 <LOCAL_USER>  staff   64 Oct  5 23:04 <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/reports
+drwxr-xr-x@ 2 <LOCAL_USER>  staff   64 Oct  5 23:04 <HOME>/Downloads/Tugas/DevOps/DevSecOps - Bab 1-4/lab/bab1/workspace/devsecops-lab/sbom
+Mode keys=700, placeholder=600
+PASS: direktori keys hanya dapat diakses pemilik; placeholder hanya dapat dibaca/ditulis pemilik.
+Bukti: berkas placeholder bukan private key atau credential nyata.
+
+=== Kondisi container sebelum praktikum ===
+NAMES                IMAGE                PORTS                       STATUS
+RINGKASAN PRIVASI: 4 container di luar praktikum tetap aktif; nama, image, dan port disunting.
+
+=== Baseline Bab 1 selesai ===

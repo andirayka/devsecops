@@ -1,0 +1,256 @@
+Self-signed certificate siap; mode private key=600 (isi kunci tidak ditampilkan).
+subject=CN=localhost, O=PENS DevSecOps Lab Bab 4
+notBefore=Oct  5 16:17:39 2026 GMT
+notAfter=Oct  5 16:17:39 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:localhost, IP Address:127.0.0.1
+ Image andi-dso-bab4-apache-web Building 
+ Image andi-dso-bab4-flask-app Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.16kB done
+#1 DONE 0.0s
+
+#2 [apache-web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 298B done
+#2 DONE 0.0s
+
+#3 [flask-app internal] load build definition from Dockerfile
+#3 transferring dockerfile: 534B done
+#3 DONE 0.0s
+
+#4 [apache-web internal] load metadata for docker.io/library/httpd:2.4-alpine
+#4 DONE 0.0s
+
+#5 [apache-web internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [apache-web 1/2] FROM docker.io/library/httpd:2.4-alpine@sha256:4e585da9d0125dec36d4500a9f5c5df7b2c0a01f67cb47865a91a4b05bdbec1b
+#6 resolve docker.io/library/httpd:2.4-alpine@sha256:4e585da9d0125dec36d4500a9f5c5df7b2c0a01f67cb47865a91a4b05bdbec1b done
+#6 DONE 0.0s
+
+#7 [apache-web 2/2] RUN sed -i 's|^#Include conf/extra/httpd-vhosts\.conf$|Include conf/extra/httpd-vhosts.conf|'       /usr/local/apache2/conf/httpd.conf     && printf '\nServerName localhost\n' >> /usr/local/apache2/conf/httpd.conf     && httpd -t
+#7 CACHED
+
+#8 [apache-web] exporting to image
+#8 exporting layers done
+#8 exporting manifest sha256:70c28d2f805ec2b2f74adb3345693afd21f272be255add805ffba8ce8922e267 done
+#8 exporting config sha256:714731b244b834523eebc9c8d1f3122d48b0236841efdfd527e85707485caec0 done
+#8 exporting attestation manifest sha256:93c0d8cc823ab47197315d2fdbfc3a0ca3c4f8f81cb19a8d3687e23a108e081a done
+#8 exporting manifest list sha256:4729a3518add4fafb0510d13058f4d6d0e528e023f398965ae22f28a02374b4c done
+#8 naming to docker.io/library/andi-dso-bab4-apache-web:latest done
+#8 unpacking to docker.io/library/andi-dso-bab4-apache-web:latest done
+#8 DONE 0.0s
+
+#9 [apache-web] resolving provenance for metadata file
+#9 DONE 0.0s
+
+#10 [flask-app internal] load metadata for docker.io/library/python:3.12-slim
+#10 DONE 0.9s
+
+#11 [flask-app internal] load .dockerignore
+#11 transferring context: 2B done
+#11 DONE 0.0s
+
+#12 [flask-app internal] load build context
+#12 transferring context: 489B done
+#12 DONE 0.0s
+
+#13 [flask-app 1/5] FROM docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d
+#13 resolve docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d done
+#13 DONE 0.0s
+
+#14 [flask-app 2/5] WORKDIR /app
+#14 CACHED
+
+#15 [flask-app 3/5] COPY requirements.txt .
+#15 DONE 0.0s
+
+#16 [flask-app 4/5] RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt     && groupadd --system --gid 10001 app     && useradd --system --uid 10001 --gid app --no-create-home app
+#16 1.045 Collecting Flask==3.1.2 (from -r requirements.txt (line 1))
+#16 1.370   Downloading flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)
+#16 1.503 Collecting gunicorn==23.0.0 (from -r requirements.txt (line 2))
+#16 1.608   Downloading gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+#16 1.714 Collecting blinker>=1.9.0 (from Flask==3.1.2->-r requirements.txt (line 1))
+#16 1.813   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#16 1.939 Collecting click>=8.1.3 (from Flask==3.1.2->-r requirements.txt (line 1))
+#16 2.037   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#16 2.140 Collecting itsdangerous>=2.2.0 (from Flask==3.1.2->-r requirements.txt (line 1))
+#16 2.243   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#16 2.354 Collecting jinja2>=3.1.2 (from Flask==3.1.2->-r requirements.txt (line 1))
+#16 2.454   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#16 2.729 Collecting markupsafe>=2.1.1 (from Flask==3.1.2->-r requirements.txt (line 1))
+#16 2.827   Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.7 kB)
+#16 2.954 Collecting werkzeug>=3.1.0 (from Flask==3.1.2->-r requirements.txt (line 1))
+#16 3.048   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+#16 3.181 Collecting packaging (from gunicorn==23.0.0->-r requirements.txt (line 2))
+#16 3.285   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#16 3.404 Downloading flask-3.1.2-py3-none-any.whl (103 kB)
+#16 3.641 Downloading gunicorn-23.0.0-py3-none-any.whl (85 kB)
+#16 3.814 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#16 3.913 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#16 4.045 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#16 4.141 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#16 4.263 Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (24 kB)
+#16 4.360 Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+#16 4.517 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#16 4.555 Installing collected packages: packaging, markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, gunicorn, Flask
+#16 4.842 Successfully installed Flask-3.1.2 blinker-1.9.0 click-8.5.0 gunicorn-23.0.0 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 packaging-26.3 werkzeug-3.1.9
+#16 4.843 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#16 4.882 useradd warning: app's uid 10001 is greater than SYS_UID_MAX 999
+#16 DONE 4.9s
+
+#17 [flask-app 5/5] COPY --chown=10001:10001 app.py .
+#17 DONE 0.0s
+
+#18 [flask-app] exporting to image
+#18 exporting layers
+#18 exporting layers 0.2s done
+#18 exporting manifest sha256:15d1cea190c48c43dae9fffa652309e8781fb4b4b68c3ccce36f0794a0f12485
+#18 exporting manifest sha256:15d1cea190c48c43dae9fffa652309e8781fb4b4b68c3ccce36f0794a0f12485 done
+#18 exporting config sha256:c61563f8e87a052b6c173b85c30a3a7a056a4f25e75097a90cb0e0ed022a4078 done
+#18 exporting attestation manifest sha256:8f2418947cf629b1440c498c80fab25621ab9fb5f4ed60437f9fb6aa96b67405 done
+#18 exporting manifest list sha256:1e9315742e12a8fb7c2ba5198d1d3e4a27f299ad9afe5d04b6682d941c108ffe done
+#18 naming to docker.io/library/andi-dso-bab4-flask-app:latest done
+#18 unpacking to docker.io/library/andi-dso-bab4-flask-app:latest 0.0s done
+#18 DONE 0.2s
+
+#19 [flask-app] resolving provenance for metadata file
+#19 DONE 0.0s
+ Image andi-dso-bab4-apache-web Built 
+ Image andi-dso-bab4-flask-app Built 
+ Network andi-dso-bab4_edge-net Creating 
+ Network andi-dso-bab4_web-net Creating 
+ Network andi-dso-bab4_edge-net Creating 
+ Network andi-dso-bab4_web-net Creating 
+ Network andi-dso-bab4_web-net Created 
+ Network andi-dso-bab4_web-net Created 
+ Container andi-dso-bab4-apache-web-1 Creating 
+ Container andi-dso-bab4-flask-app-1 Creating 
+ Network andi-dso-bab4_edge-net Created 
+ Network andi-dso-bab4_edge-net Created 
+ Container andi-dso-bab4-flask-app-1 Created 
+ Container andi-dso-bab4-apache-web-1 Created 
+ Container andi-dso-bab4-proxy-1 Creating 
+ Container andi-dso-bab4-proxy-1 Created 
+ Container andi-dso-bab4-flask-app-1 Starting 
+ Container andi-dso-bab4-apache-web-1 Starting 
+ Container andi-dso-bab4-flask-app-1 Started 
+ Container andi-dso-bab4-apache-web-1 Started 
+ Container andi-dso-bab4-apache-web-1 Waiting 
+ Container andi-dso-bab4-flask-app-1 Waiting 
+ Container andi-dso-bab4-apache-web-1 Healthy 
+ Container andi-dso-bab4-flask-app-1 Healthy 
+ Container andi-dso-bab4-proxy-1 Starting 
+ Container andi-dso-bab4-proxy-1 Started 
+NAME                         IMAGE                      COMMAND                  SERVICE      CREATED          STATUS                    PORTS
+andi-dso-bab4-apache-web-1   andi-dso-bab4-apache-web   "httpd-foreground"       apache-web   13 seconds ago   Up 12 seconds (healthy)   80/tcp
+andi-dso-bab4-flask-app-1    andi-dso-bab4-flask-app    "gunicorn --bind 0.0…"   flask-app    13 seconds ago   Up 12 seconds (healthy)   5000/tcp
+andi-dso-bab4-proxy-1        nginx:alpine               "/docker-entrypoint.…"   proxy        13 seconds ago   Up 7 seconds (healthy)    127.0.0.1:18084->80/tcp, 127.0.0.1:18444->443/tcp
+== Validasi konfigurasi service yang berjalan ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+Syntax OK
+== Uji sukses: HTTP dialihkan ke HTTPS ==
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.31.6
+Date: Mon, 05 Oct 2026 16:20:51 GMT
+Content-Type: text/html
+Content-Length: 169
+Connection: keep-alive
+Location: https://localhost:18444/
+
+== Uji sukses: Apache default melalui reverse proxy ==
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevSecOps Bab 4</title>
+</head>
+<body>
+  <h1>Apache di Belakang Nginx</h1>
+  <p>Apache hanya dapat diakses melalui reverse proxy Nginx.</p>
+  <p><a href="/api/">Buka Flask API</a></p>
+</body>
+</html>
+== Uji sukses: Flask API dan health melalui /api ==
+{"forwarded_proto":"https","message":"API Bab 4 diakses melalui Nginx reverse proxy","service":"flask-app","status":"ok"}
+{"status":"healthy"}
+== Uji normalisasi path slash berulang di Nginx ==
+{"status":"healthy"}
+PASS: //api///health dinormalisasi dan tetap mencapai health endpoint Flask.
+== Uji gagal yang diharapkan: sertifikat self-signed tidak dipercaya curl ==
+curl: (60) SSL certificate problem: self signed certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+PASS: verifikasi sertifikat menolak CA self-signed; -k hanya dipakai untuk lab.
+== Uji gagal yang diharapkan: endpoint API tidak dikenal menghasilkan 404 ==
+HTTP 404
+== Uji sukses: TLS dan identitas sertifikat ==
+subject=CN=localhost, O=PENS DevSecOps Lab Bab 4
+notBefore=Oct  5 16:17:39 2026 GMT
+notAfter=Oct  5 16:17:39 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:localhost, IP Address:127.0.0.1
+Connecting to 127.0.0.1
+depth=0 CN=localhost, O=PENS DevSecOps Lab Bab 4
+verify error:num=18:self-signed certificate
+CONNECTION ESTABLISHED
+Protocol version: TLSv1.2
+Ciphersuite: ECDHE-RSA-AES256-GCM-SHA384
+Peer certificate: CN=localhost, O=PENS DevSecOps Lab Bab 4
+Hash used: SHA256
+Signature type: rsa_pss_rsae_sha256
+Verification error: self-signed certificate
+Supported Elliptic Curve Point Formats: uncompressed:ansiX962_compressed_prime:ansiX962_compressed_char2
+Peer Temp Key: X25519, 253 bits
+DONE
+PASS: negosiasi TLSv1.2 berhasil.
+Connecting to 127.0.0.1
+depth=0 CN=localhost, O=PENS DevSecOps Lab Bab 4
+verify error:num=18:self-signed certificate
+CONNECTION ESTABLISHED
+Protocol version: TLSv1.3
+Ciphersuite: TLS_AES_256_GCM_SHA384
+Peer certificate: CN=localhost, O=PENS DevSecOps Lab Bab 4
+Hash used: SHA256
+Signature type: rsa_pss_rsae_sha256
+Verification error: self-signed certificate
+Negotiated TLS1.3 group: X25519MLKEM768
+DONE
+PASS: negosiasi TLSv1.3 berhasil.
+== Uji sukses: hanya proxy mempublikasikan port loopback ==
+80/tcp -> 127.0.0.1:18084
+443/tcp -> 127.0.0.1:18444
+PASS: private key mode 0600 dan mount cert/key read-only.
+== Uji sukses: backend tidak memiliki published port host ==
+PASS: apache-web:80 hanya tersedia di network Compose.
+PASS: flask-app:5000 hanya tersedia di network Compose.
+== Uji sukses: Nginx dapat mencapai backend pada network privat ==
+  <h1>Apache di Belakang Nginx</h1>
+{"status":"healthy"}
+== Uji sukses: TLS access log tersimpan pada host ==
+172.23.0.1 - - [05/Oct/2026:16:20:51 +0000] "HEAD / HTTP/1.1" 301 0 "-" "curl/8.7.1" "-"
+172.23.0.1 - - [05/Oct/2026:16:20:51 +0000] "GET / HTTP/1.1" 200 345 "-" "curl/8.7.1"
+172.23.0.1 - - [05/Oct/2026:16:20:51 +0000] "GET /api/ HTTP/1.1" 200 122 "-" "curl/8.7.1"
+172.23.0.1 - - [05/Oct/2026:16:20:51 +0000] "GET /api/health HTTP/1.1" 200 21 "-" "curl/8.7.1"
+172.23.0.1 - - [05/Oct/2026:16:20:51 +0000] "GET //api///health HTTP/1.1" 200 21 "-" "curl/8.7.1"
+172.23.0.1 - - [05/Oct/2026:16:20:51 +0000] "GET /api/not-found HTTP/1.1" 404 207 "-" "curl/8.7.1"
+== Bukti akhir ==
+NAME                         IMAGE                      COMMAND                  SERVICE      CREATED          STATUS                    PORTS
+andi-dso-bab4-apache-web-1   andi-dso-bab4-apache-web   "httpd-foreground"       apache-web   14 seconds ago   Up 13 seconds (healthy)   80/tcp
+andi-dso-bab4-flask-app-1    andi-dso-bab4-flask-app    "gunicorn --bind 0.0…"   flask-app    14 seconds ago   Up 13 seconds (healthy)   5000/tcp
+andi-dso-bab4-proxy-1        nginx:alpine               "/docker-entrypoint.…"   proxy        14 seconds ago   Up 8 seconds (healthy)    127.0.0.1:18084->80/tcp, 127.0.0.1:18444->443/tcp
+HTTP redirect: HTTP/1.1 301 Moved Permanently
+HTTPS /: HTTP 200
+API /api/: {"forwarded_proto":"https","message":"API Bab 4 diakses melalui Nginx reverse proxy","service":"flask-app","status":"ok"}
+API /api/health: {"status":"healthy"}
+Semua uji Bab 4 lulus. Jalankan docker compose down setelah menyimpan bukti; jangan gunakan down -v bila ingin mempertahankan data.
+
+== Teardown Bab 4 ==
+PASS: project containers/networks removed with docker compose down.
+PASS: host-mounted Nginx access log remains readable and contains the successful API health request.

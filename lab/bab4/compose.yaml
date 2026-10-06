@@ -1,0 +1,65 @@
+name: andi-dso-bab4
+
+services:
+  proxy:
+    image: nginx:alpine
+    ports:
+      - "127.0.0.1:18084:80"
+      - "127.0.0.1:18444:443"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d:ro
+      - ./certs:/etc/nginx/certs:ro
+      - ./logs/nginx:/var/log/nginx
+    networks:
+      - edge-net
+      - web-net
+    depends_on:
+      apache-web:
+        condition: service_healthy
+      flask-app:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "nginx -t && kill -0 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  apache-web:
+    image: andi-dso-bab4-apache-web
+    build:
+      context: ./apache
+    volumes:
+      - ./apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf:ro
+      - ./apache/sites:/usr/local/apache2/htdocs:ro
+    networks:
+      - web-net
+    healthcheck:
+      test: ["CMD-SHELL", "httpd -t && kill -0 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  flask-app:
+    build:
+      context: ./app
+    networks:
+      - web-net
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health', timeout=2)"
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+networks:
+  edge-net:
+    driver: bridge
+  web-net:
+    driver: bridge
+    internal: true

@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+keys/*
+reports/*
+sbom/*
+*.key
+*.pem

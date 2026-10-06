@@ -113,7 +113,6 @@ Kode verifier saat ini menerima path PDF dan folder render sebagai argumen posis
 
 ## Referensi, provenance, dan privasi
 
-- [Reza1290/devsecops-pens](https://github.com/Reza1290/devsecops-pens/) adalah **referensi ruang lingkup/topik dan contoh penyajian**, bukan sumber evidence, hasil eksperimen, atau klaim milik Andi.
 - Jangan menyalin tangkapan layar, log, atau identitas dari laporan orang lain. Gunakan bukti praktikum yang dibuat sendiri, simpan di `evidence/babN/`, dan cantumkan sumber eksternal yang digunakan.
 - Jangan unggah kredensial, token, `.env` berisi rahasia, private key, atau backup volume database. Git mengabaikan direktori `keys/`, `lab/**/backups/`, berkas `*.key`/`*.pem`, dan isi `secrets/`; hanya file `*.example` di dalam `secrets/` yang trackable. File contoh harus berisi placeholder/demo yang aman untuk publik, bukan password nyata. Berkas `*.raw.txt` dan artefak review lokal `/.amp/in/` juga diabaikan; tambahkan hanya evidence yang sudah disanitasi.
 - Sertifikat publik berekstensi `.crt` atau `.cer` tidak diabaikan; verifikasi isinya sebelum dibagikan. Berkas `.pem` selalu diabaikan, termasuk jika berisi sertifikat publik.

@@ -1,7 +1,7 @@
 # Kontrak input Markdown
 
-Generator membaca UTF-8 dari `chapters/bab1.md` sampai `chapters/bab4.md`. Tiap
-file menjadi satu laporan mandiri; build penuh membuat empat PDF terpisah dan
+Generator membaca UTF-8 dari `chapters/bab1.md` sampai `chapters/bab5.md`. Tiap
+file menjadi satu laporan mandiri; build penuh membuat lima PDF terpisah dan
 satu PDF gabungan. Generator menyediakan cover dan page break, jadi isi file
 hanya berisi badan laporan. Jangan masukkan cover LaTeX, `\begin{center}`,
 `\includegraphics`, atau perintah `\pagebreak` dari laporan sumber.
@@ -59,12 +59,12 @@ Contoh path ber-spasi dengan delimiter sudut:
 ## Build
 
 ```sh
-python3 build_report.py                    # empat PDF mandiri + satu gabungan
+python3 build_report.py                    # lima PDF mandiri + satu gabungan
 python3 build_report.py --chapter chapters/bab2.md  # satu PDF bab saja
 python3 verify_report.py path/laporan.pdf renders/bab2
 ```
 
 Build penuh menulis `output/bab1/3123640021_Andi.pdf` hingga
-`output/bab4/3123640021_Andi.pdf`, serta `output/3123640021_Andi.pdf`.
+`output/bab5/3123640021_Andi.pdf`, serta `output/3123640021_Andi.pdf`.
 `--chapter FILE` hanya menulis PDF mandiri di `output/babN/`; file sumber tidak
 dipindah atau diubah.

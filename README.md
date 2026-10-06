@@ -1,6 +1,6 @@
-# Laporan Praktikum DevSecOps Bab 1–4
+# Laporan Praktikum DevSecOps Bab 1–5
 
-> **Status:** praktikum runtime Bab 1–4 lulus. Empat PDF per bab yang dipublikasikan lulus verifikasi overlap dan pemeriksaan visual; hasil ini mencakup build terbaru setelah revisi Bab 3.
+> **Status:** praktikum Bab 1–5 lulus. Lima PDF per bab lulus verifikasi overlap dan pemeriksaan visual. Bab 5 memakai PostgreSQL 16, pgAdmin, volume persisten, serta uji backup dan restore.
 
 ## Identitas
 
@@ -16,6 +16,7 @@
 2. **Bab 2 — Konsep Container dan Instalasi Docker:** perbedaan VM dan container, arsitektur Docker, instalasi/penggunaan Docker, container dasar, dan custom image.
 3. **Bab 3 — Docker Network, Volume, Bind Mount, dan Compose:** DNS dan segmentasi jaringan, persistensi data, bind mount/tmpfs, serta orkestrasi multi-container dan healthcheck.
 4. **Bab 4 — Web Service Container: Apache, Nginx, Reverse Proxy, dan TLS:** pemisahan layanan web/API, routing reverse proxy, TLS, pengamanan private key, dan pencatatan akses.
+5. **Bab 5 — Database Service di Docker: PostgreSQL:** PostgreSQL dan pgAdmin, init script, named volume, logical backup, checksum, dan restore ke database terpisah.
 
 Topik ini mengikuti ruang lingkup praktikum. Hasil, klaim, dan kesimpulan setiap bab harus berasal dari pekerjaan serta verifikasi Andi sendiri.
 
@@ -23,11 +24,11 @@ Topik ini mengikuti ruang lingkup praktikum. Hasil, klaim, dan kesimpulan setiap
 
 | Lokasi | Isi dan kegunaan |
 | --- | --- |
-| `chapters/bab1.md`–`chapters/bab4.md` | Sumber Markdown untuk generator. Build penuh memerlukan keempat file tidak kosong; build satu bab hanya memerlukan file yang dipilih. |
+| `chapters/bab1.md`–`chapters/bab5.md` | Sumber Markdown untuk generator. Build penuh memerlukan kelima file tidak kosong; build satu bab hanya memerlukan file yang dipilih. |
 | `lab/babN/` | Berkas kerja tiap bab, misalnya konfigurasi dan kode/container praktikum. Simpan materi sesuai babnya. |
 | `evidence/babN/` | Bukti milik Andi untuk bab terkait: tangkapan layar dan hasil pemeriksaan yang relevan. Jangan menaruh screenshot orang lain sebagai bukti. |
 | `assets/` | Aset laporan, termasuk logo PENS yang sudah tersedia di `assets/logo-pens.png`. |
-| `output/babN/` | Empat PDF per bab yang dihasilkan `build_report.py` dan dipublikasikan. |
+| `output/babN/` | Lima PDF per bab yang dihasilkan `build_report.py` dan dipublikasikan. |
 | `output/` | Generator dapat menyimpan PDF gabungan lokal di sini; PDF gabungan sengaja diabaikan dan tidak masuk repo publik. |
 | `renders/` | PNG hasil render verifier (default); artefak render lokal ini diabaikan oleh `.gitignore`. |
 
@@ -35,7 +36,7 @@ Folder `lab/` dan `evidence/` menyimpan konfigurasi serta bukti praktikum milik 
 
 ## Keluaran laporan
 
-PDF yang dipublikasikan adalah empat laporan per bab:
+PDF yang dipublikasikan adalah lima laporan per bab:
 
 | PDF | Halaman |
 | --- | ---: |
@@ -43,20 +44,22 @@ PDF yang dipublikasikan adalah empat laporan per bab:
 | [Laporan Bab 2](output/bab2/3123640021_Andi.pdf) | 6 |
 | [Laporan Bab 3](output/bab3/3123640021_Andi.pdf) | 5 |
 | [Laporan Bab 4](output/bab4/3123640021_Andi.pdf) | 4 |
+| [Laporan Bab 5](output/bab5/3123640021_Andi.pdf) | 4 |
 
-Total laporan per bab yang dipublikasikan adalah 22 halaman. Generator tetap mendukung keluaran gabungan sebagai artefak lokal, tetapi bukan bagian dari publikasi ini.
+Total laporan per bab yang dipublikasikan adalah 26 halaman. Generator tetap mendukung keluaran gabungan sebagai artefak lokal, tetapi bukan bagian dari publikasi ini.
 
 ## Lingkungan dan port praktikum
 
 Preflight lokal menemukan Docker Engine siap melalui **Colima dengan Ubuntu 24.04.4 LTS ARM64**. Perintah yang memerlukan lingkungan Linux harus dijalankan di VM tersebut, bukan dianggap berjalan pada kernel macOS host.
 
-Port berikut adalah **rencana pemetaan port host yang diadaptasi**, bukan hasil pengujian:
+Port Bab 2–4 berikut adalah **rencana pemetaan port host yang diadaptasi**, bukan hasil pengujian. Bab 5 sudah dijalankan dengan port loopback berikut:
 
-| Bab | Port host yang direncanakan |
+| Bab | Port host |
 | --- | --- |
 | 2 | `18082` (Nginx) dan `19092` (custom web) |
 | 3 | `18083` (web) |
 | 4 | `18084` (HTTP) dan `18444` (HTTPS) |
+| 5 | `127.0.0.1:15432` (PostgreSQL) dan `127.0.0.1:15050` (pgAdmin), hasil aktual |
 
 Periksa ketersediaan port sebelum menjalankan stack. Pertahankan container atau stack pengguna yang sudah berjalan; jangan menghentikannya hanya untuk membebaskan port tanpa persetujuan.
 
@@ -77,7 +80,7 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-Bantuan generator telah diperiksa melalui `python3 build_report.py --help`. Build penuh memerlukan `chapters/bab1.md` sampai `chapters/bab4.md` dan menghasilkan satu PDF per bab serta satu PDF gabungan lokal. PDF gabungan tidak dipublikasikan. Opsi `--chapter FILE` membangun satu bab saja tanpa memerlukan tiga bab lainnya:
+Bantuan generator telah diperiksa melalui `python3 build_report.py --help`. Build penuh memerlukan `chapters/bab1.md` sampai `chapters/bab5.md` dan menghasilkan satu PDF per bab serta satu PDF gabungan lokal. PDF gabungan tidak dipublikasikan. Opsi `--chapter FILE` membangun satu bab saja tanpa memerlukan file bab lainnya:
 
 ```bash
 python3 build_report.py --help
@@ -107,13 +110,13 @@ python3 verify_report.py
 python3 verify_report.py output/bab1/3123640021_Andi.pdf renders/bab1
 ```
 
-Build terbaru setelah revisi Bab 3: empat PDF per bab yang dipublikasikan lulus pemeriksaan overlap dengan ambang `8 pt²` dan seluruh 22 halaman berhasil dirender. Parent meninjau visual seluruh 9 halaman Bab 3–4 serta PDF Bab 1–2 pada pemeriksaan sebelumnya, termasuk koreksi ASCII Bab 1 halaman 4. Tidak ditemukan overlap, clipping, atau glyph hitam.
+PDF Bab 5 memiliki empat halaman. `python3 verify_report.py output/bab5/3123640021_Andi.pdf renders/bab5` lulus dengan nol overlap di atas `8 pt²` dan merender keempat halaman pada 120 dpi. Saya memeriksa setiap render. PDF mencakup cover, hasil runtime, lima jawaban evaluasi, latihan mandiri, dan daftar pustaka.
 
 Kode verifier saat ini menerima path PDF dan folder render sebagai argumen posisi; `--help` belum tersedia pada verifier.
 
 ## Referensi, provenance, dan privasi
 
 - Jangan menyalin tangkapan layar, log, atau identitas dari laporan orang lain. Gunakan bukti praktikum yang dibuat sendiri, simpan di `evidence/babN/`, dan cantumkan sumber eksternal yang digunakan.
-- Jangan unggah kredensial, token, `.env` berisi rahasia, private key, atau backup volume database. Git mengabaikan direktori `keys/`, `lab/**/backups/`, berkas `*.key`/`*.pem`, dan isi `secrets/`; hanya file `*.example` di dalam `secrets/` yang trackable. File contoh harus berisi placeholder/demo yang aman untuk publik, bukan password nyata. Berkas `*.raw.txt` dan artefak review lokal `/.amp/in/` juga diabaikan; tambahkan hanya evidence yang sudah disanitasi.
+- Jangan unggah kredensial, token, `.env` berisi rahasia, private key, atau backup volume database. Git mengabaikan direktori `keys/`, folder `lab/**/backup/` dan `lab/**/backups/`, berkas `*.key`/`*.pem`, dan isi `secrets/`; hanya file `*.example` di dalam `secrets/` yang trackable. File contoh harus berisi placeholder/demo yang aman untuk publik, bukan password nyata. Berkas `*.raw.txt` dan artefak review lokal `/.amp/in/` juga diabaikan; tambahkan hanya evidence yang sudah disanitasi.
 - Sertifikat publik berekstensi `.crt` atau `.cer` tidak diabaikan; verifikasi isinya sebelum dibagikan. Berkas `.pem` selalu diabaikan, termasuk jika berisi sertifikat publik.
 - Periksa kembali screenshot/log agar tidak memuat data pribadi, alamat internal yang sensitif, atau rahasia sebelum menambahkannya ke repo publik.

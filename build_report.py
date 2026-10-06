@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Bangun laporan resmi A4 dari chapters/bab1.md sampai bab4.md.
+"""Bangun laporan resmi A4 dari chapters/bab1.md sampai bab5.md.
 
 Jalankan dari folder tugas dengan:
     python3 build_report.py
@@ -43,7 +43,13 @@ DEFAULT_CHAPTERS = BASE / "chapters"
 DEFAULT_OUTPUT_DIR = BASE / "output"
 PDF_FILENAME = "3123640021_Andi.pdf"
 LOGO = BASE / "assets" / "logo-pens.png"
-CHAPTERS = (("bab1", "Bab 1"), ("bab2", "Bab 2"), ("bab3", "Bab 3"), ("bab4", "Bab 4"))
+CHAPTERS = (
+    ("bab1", "Bab 1"),
+    ("bab2", "Bab 2"),
+    ("bab3", "Bab 3"),
+    ("bab4", "Bab 4"),
+    ("bab5", "Bab 5"),
+)
 
 PAGE_W, PAGE_H = A4
 MARGIN = 2 * cm
@@ -534,7 +540,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--chapters-dir", type=Path, default=DEFAULT_CHAPTERS)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--output", type=Path, help="Path PDF gabungan (default: <output-dir>/3123640021_Andi.pdf)")
-    parser.add_argument("--chapter", type=Path, metavar="FILE", help="Build satu laporan bab saja tanpa memerlukan tiga bab lainnya")
+    parser.add_argument("--chapter", type=Path, metavar="FILE", help="Build satu laporan bab saja tanpa memerlukan file bab lainnya")
     parser.add_argument("--lecturer", help="Dosen pengampu yang telah diverifikasi")
     parser.add_argument("--group", help="Nama/nomor kelompok yang telah diverifikasi")
     parser.add_argument("--academic-year", help="Tahun akademik yang telah diverifikasi")
@@ -592,7 +598,7 @@ def main() -> int:
         chapter_id = chapter_file.stem.casefold()
         chapter_labels = dict(CHAPTERS)
         if chapter_id not in chapter_labels or chapter_file.suffix.casefold() != ".md":
-            raise SystemExit("--chapter harus menunjuk ke bab1.md, bab2.md, bab3.md, atau bab4.md.")
+            raise SystemExit("--chapter harus menunjuk ke bab1.md sampai bab5.md.")
         if not chapter_file.is_file():
             raise SystemExit(f"Berkas bab tidak ditemukan: {chapter_file}")
         content = chapter_file.read_text(encoding="utf-8").strip()
@@ -633,7 +639,7 @@ def main() -> int:
         print(f"PDF {chapter_label}: {output_path}")
 
     combined_path = args.output or args.output_dir / PDF_FILENAME
-    combined_label = "DevSecOps Bab 1–4"
+    combined_label = "DevSecOps Bab 1–5"
     combined_chapters = [
         (chapter_id, chapter_label, chapter_file, markdown_to_flowables(chapter_file, content))
         for chapter_id, chapter_label, chapter_file, content in chapter_sources
@@ -642,7 +648,7 @@ def main() -> int:
         args,
         combined_chapters,
         combined_path,
-        "Bab 1 · Bab 2 · Bab 3 · Bab 4",
+        "Bab 1 · Bab 2 · Bab 3 · Bab 4 · Bab 5",
         combined_label,
     )
     print(f"PDF gabungan: {combined_path}")

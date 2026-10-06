@@ -1,0 +1,50 @@
+name: andi-devsecops-bab5
+
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Run scripts/create-env.sh first}
+      POSTGRES_USER: ${POSTGRES_USER:?Run scripts/create-env.sh first}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run scripts/create-env.sh first}
+    ports:
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-15432}:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - data-net
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:?Run scripts/create-env.sh first}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:?Run scripts/create-env.sh first}
+    ports:
+      - "127.0.0.1:${PGADMIN_HOST_PORT:-15050}:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+    networks:
+      - data-net
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pg-data:
+  pgadmin-data:
+
+networks:
+  data-net:
+    driver: bridge

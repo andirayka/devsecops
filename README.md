@@ -5,7 +5,7 @@
 ## Identitas
 
 - **Nama:** Andi Rayka C
-- **NRP:** 3123640021
+- **NRP:** 3126640005
 - **Kelas:** D4 LJ Informatika
 - **Program studi:** LJ-D4 Teknik Informatika
 - **Institusi:** Politeknik Elektronika Negeri Surabaya (PENS)

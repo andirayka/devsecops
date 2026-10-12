@@ -1,7 +1,7 @@
 # Bab 2 — Konsep Container dan Praktik Docker
 
 **Nama:** Andi Rayka C  
-**NRP:** 3123640021  
+**NRP:** 3126640005  
 **Kelas:** D4 LJ Informatika  
 **Tanggal praktikum:** 5 Oktober 2026
 

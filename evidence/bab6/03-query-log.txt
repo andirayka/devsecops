@@ -1,0 +1,67 @@
+-- 1. Distribusi tag
+                tag                | total 
+-----------------------------------+-------
+ pmb.pmb-lab-registration-api-1    |    57
+ pmb.pmb-lab-auth-service-1        |    20
+ pmb.pmb-lab-verification-worker-1 |    10
+(3 rows)
+
+-- 2. Tipe data & contoh record (struktur tag,time,data)
+ tipe  | count 
+-------+-------
+ jsonb |    87
+(1 row)
+
+-- Kronologi Baseline normal (REQ-4edc7a694e694c5ca91e9d5580c390b6)
+  waktu   |       service       | sev  |         event          | attempt | error_code 
+----------+---------------------+------+------------------------+---------+------------
+ 03:29:33 | registration-api    | INFO | registration_submitted |         | 
+ 03:29:34 | verification-worker | INFO | verification_started   |         | 
+ 03:29:35 | verification-worker | INFO | verification_completed | 1       | 
+(3 rows)
+
+-- Kronologi Insiden timeout (REQ-d51bcb27d018480b926ad32062de17c2)
+  waktu   |       service       |  sev  |         event          | attempt |   error_code   
+----------+---------------------+-------+------------------------+---------+----------------
+ 03:29:39 | registration-api    | INFO  | registration_submitted |         | 
+ 03:29:39 | verification-worker | INFO  | verification_started   |         | 
+ 03:29:39 | verification-worker | WARN  | verification_retry     | 1       | 
+ 03:29:40 | verification-worker | WARN  | verification_retry     | 2       | 
+ 03:29:41 | verification-worker | WARN  | verification_retry     | 3       | 
+ 03:29:42 | verification-worker | ERROR | dependency_timeout     | 3       | VERIFY-TIMEOUT
+(6 rows)
+
+-- Kronologi Recovery (REQ-8a66f655f99242b59801db9942f326e3)
+  waktu   |       service       | sev  |         event          | attempt | error_code 
+----------+---------------------+------+------------------------+---------+------------
+ 03:29:47 | registration-api    | INFO | registration_submitted |         | 
+ 03:29:48 | verification-worker | INFO | verification_started   |         | 
+ 03:29:49 | verification-worker | INFO | verification_completed | 1       | 
+(3 rows)
+
+-- WARN/ERROR per service
+       service       |  sev  |       event        | count 
+---------------------+-------+--------------------+-------
+ verification-worker | WARN  | verification_retry |     3
+ verification-worker | ERROR | dependency_timeout |     1
+(2 rows)
+
+-- Pemeriksaan secret (harus 0)
+ temuan 
+--------
+      0
+(1 row)
+
+-- Log per menit, 10 menit terakhir (Latihan 5)
+        menit        | total 
+---------------------+-------
+ 2026-10-28 03:30:00 |     3
+ 2026-10-28 03:29:00 |    84
+(2 rows)
+
+-- Pratinjau retensi 7 hari
+ candidate_for_deletion 
+------------------------
+                      0
+(1 row)
+

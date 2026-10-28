@@ -44,6 +44,8 @@ DEFAULT_OUTPUT_DIR = BASE / "output"
 PDF_FILENAME = "3123640021_Andi.pdf"
 LOGO = BASE / "assets" / "logo-pens.png"
 CHAPTERS = (("bab1", "Bab 1"), ("bab2", "Bab 2"), ("bab3", "Bab 3"), ("bab4", "Bab 4"))
+# Bab 6 dibangun mandiri lewat --chapter; build penuh tetap Bab 1-4.
+SINGLE_ONLY = {"bab6": ("Bab 6", "3126640005_Andi.pdf")}
 
 PAGE_W, PAGE_H = A4
 MARGIN = 2 * cm
@@ -233,7 +235,7 @@ def cover(args: argparse.Namespace, subtitle: str, report_label: str) -> list:
             Spacer(1, 1.15 * cm),
             Paragraph("Disusun oleh:", STYLES["cover_small"]),
             Paragraph("Andi Rayka C", STYLES["cover_name"]),
-            Paragraph("NRP 3123640021", STYLES["cover_line"]),
+            Paragraph("NRP 3126640005", STYLES["cover_line"]),
             Paragraph("Kelas D4 LJ Informatika", STYLES["cover_line"]),
             Spacer(1, 1.25 * cm),
             Paragraph("PROGRAM STUDI LJ-D4 TEKNIK INFORMATIKA", STYLES["cover_line"]),
@@ -590,9 +592,9 @@ def main() -> int:
             chapter_file = args.chapters_dir / chapter_file
         chapter_file = chapter_file.resolve()
         chapter_id = chapter_file.stem.casefold()
-        chapter_labels = dict(CHAPTERS)
+        chapter_labels = {**dict(CHAPTERS), **{k: v[0] for k, v in SINGLE_ONLY.items()}}
         if chapter_id not in chapter_labels or chapter_file.suffix.casefold() != ".md":
-            raise SystemExit("--chapter harus menunjuk ke bab1.md, bab2.md, bab3.md, atau bab4.md.")
+            raise SystemExit("--chapter harus menunjuk ke bab1.md sampai bab4.md, atau bab6.md.")
         if not chapter_file.is_file():
             raise SystemExit(f"Berkas bab tidak ditemukan: {chapter_file}")
         content = chapter_file.read_text(encoding="utf-8").strip()
@@ -600,7 +602,7 @@ def main() -> int:
             raise SystemExit(f"Berkas Markdown kosong: {chapter_file}; PDF tidak dibuat.")
         chapter_label = chapter_labels[chapter_id]
         report_label = f"DevSecOps {chapter_label}"
-        output_path = args.output_dir / chapter_id / PDF_FILENAME
+        output_path = args.output_dir / chapter_id / (SINGLE_ONLY[chapter_id][1] if chapter_id in SINGLE_ONLY else PDF_FILENAME)
         flowables = markdown_to_flowables(chapter_file, content)
         build_pdf(args, [(chapter_id, chapter_label, chapter_file, flowables)], output_path, chapter_label, report_label)
         print(f"PDF {chapter_label}: {output_path}")

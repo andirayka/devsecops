@@ -1,0 +1,37 @@
+$ ./scripts/demo-normal.sh   # Tahap A
+[PASS] Portal PMB siap
+[INFO] Request ID: REQ-4edc7a694e694c5ca91e9d5580c390b6
+              public_id               |  status  | attempt | failure_code |              request_id              
+--------------------------------------+----------+---------+--------------+--------------------------------------
+ 63d08e57-eee2-41e4-a0ba-7fd793d3ab60 | VERIFIED |       1 |              | REQ-4edc7a694e694c5ca91e9d5580c390b6
+(1 row)
+
+[PASS] Demo normal selesai. Status yang diharapkan: VERIFIED.
+
+$ ./scripts/demo-incident.sh   # Tahap B
+[PASS] Portal PMB siap
+[INFO] Request ID: REQ-d51bcb27d018480b926ad32062de17c2
+              public_id               | status | attempt |  failure_code  |              request_id              
+--------------------------------------+--------+---------+----------------+--------------------------------------
+ 1945979e-dd81-4aeb-9f1b-776a26bc3e45 | FAILED |       3 | VERIFY-TIMEOUT | REQ-d51bcb27d018480b926ad32062de17c2
+(1 row)
+
+[INFO] Gunakan request ID di atas pada queries/incident-analysis.sql.
+[PASS] Demo insiden selesai. Status yang diharapkan: FAILED / VERIFY-TIMEOUT.
+
+$ ./scripts/set-incident.sh none && ./scripts/demo-normal.sh   # Tahap C
+UPDATE 1
+      key      | value |          updated_at           
+---------------+-------+-------------------------------
+ incident_mode | none  | 2026-10-28 03:29:47.445934+00
+(1 row)
+
+[PASS] Mode insiden: none
+[PASS] Portal PMB siap
+[INFO] Request ID: REQ-8a66f655f99242b59801db9942f326e3
+              public_id               |  status  | attempt | failure_code |              request_id              
+--------------------------------------+----------+---------+--------------+--------------------------------------
+ 47a2753e-d059-481e-94d5-9c43a54ad586 | VERIFIED |       1 |              | REQ-8a66f655f99242b59801db9942f326e3
+(1 row)
+
+[PASS] Demo normal selesai. Status yang diharapkan: VERIFIED.

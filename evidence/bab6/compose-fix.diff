@@ -1,0 +1,28 @@
+--- /tmp/compose.orig.yaml	2026-10-28 10:28:45
++++ compose.yaml	2026-10-28 10:28:45
+@@ -76,6 +76,7 @@
+       - "127.0.0.1:2020:2020"
+     networks:
+       - logging-net
++      - edge-net
+     depends_on:
+       log-db:
+         condition: service_healthy
+@@ -133,6 +134,7 @@
+       - "127.0.0.1:8080:8080"
+     networks:
+       - app-net
++      - edge-net
+     depends_on:
+       app-db:
+         condition: service_healthy
+@@ -181,6 +183,9 @@
+   fluent-bit-buffer:
+ 
+ networks:
++  # internal: true menonaktifkan published port. edge-net hanya dipakai dua
++  # service yang perlu dijangkau host; database tetap di jaringan internal.
++  edge-net:
+   app-net:
+     internal: true
+   logging-net:

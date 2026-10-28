@@ -1,0 +1,14 @@
+$ docker compose ps
+SERVICE               STATUS                    PORTS
+app-db                Up 19 seconds (healthy)   5432/tcp
+auth-service          Up 13 seconds (healthy)   8080-8081/tcp
+fluent-bit            Up 13 seconds             127.0.0.1:2020->2020/tcp, 127.0.0.1:24224->24224/tcp
+log-db                Up 19 seconds (healthy)   5432/tcp
+registration-api      Up 8 seconds (healthy)    127.0.0.1:8080->8080/tcp, 8081/tcp
+verification-worker   Up 13 seconds             8080-8081/tcp
+
+$ curl http://127.0.0.1:8080/healthz
+{"service":"registration-api","status":"ok"}
+
+$ curl http://127.0.0.1:2020/api/v1/health
+{"fluent-bit":{"version":"4.2.8","edition":"Community", ...}} HTTP 200

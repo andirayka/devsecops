@@ -1,0 +1,18 @@
+[Tahap D, ulang] Retry_Limit no_limits
+ Container pmb-lab-log-db-1 Stopped 
+Request: REQ-20e0ac0c730d4fbfb3af78ea49db1c32
+Request: REQ-cb951fafcb674886be870bb9b1089283
+Request: REQ-01bcca2325e54899b2ee489ff837f8d9
+ Container pmb-lab-log-db-1 Started 
+Event bisnis tiba setelah pemulihan: 8 dari 9 yang diharapkan
+              request_id              | event_bisnis 
+--------------------------------------+--------------
+ REQ-01bcca2325e54899b2ee489ff837f8d9 |            3
+ REQ-20e0ac0c730d4fbfb3af78ea49db1c32 |            2
+ REQ-cb951fafcb674886be870bb9b1089283 |            3
+(3 rows)
+
+{"proc_records": 141, "proc_bytes": 44131, "errors": 0, "retries": 65, "retries_failed": 0, "dropped_records": 0, "retried_records": 174}
+{"records": 141, "bytes": 44131}
+
+Hitung ulang setelah backlog selesai (tidak ada retry tersisa): REQ-01bc..=3, REQ-cb95..=3, REQ-20e0..=2 -> 8 dari 9 event bisnis; dropped_records=0.

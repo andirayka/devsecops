@@ -1,0 +1,21 @@
+$ event aplikasi untuk 3 request saat log-db mati (diharapkan: submitted, started, completed = 3 per request)
+              request_id              | event_bisnis | http 
+--------------------------------------+--------------+------
+ REQ-b327db6aad564876a086c225d267190f |            2 |    1
+(1 row)
+
+$ ./scripts/verify.sh
+[PASS] Portal PMB siap
+[INFO] Pendaftaran: 6
+[INFO] Record log: 117
+[PASS] Service sehat, transaksi tersedia, log tersimpan, dan pemeriksaan secret bersih.
+
+$ make test
+test_invalid_request_id_is_replaced (test_common.CommonTests.test_invalid_request_id_is_replaced) ... ok
+test_sensitive_fields_are_redacted (test_common.CommonTests.test_sensitive_fields_are_redacted) ... ok
+test_valid_request_id_is_preserved (test_common.CommonTests.test_valid_request_id_is_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

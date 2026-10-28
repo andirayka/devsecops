@@ -1,0 +1,32 @@
+[Tahap D] Resilience logging
+Jumlah record sebelum: 93
+ Container pmb-lab-log-db-1 Stopped 
+[INFO] Request ID: REQ-d46aa0f89c8d404c9c8eb27a6b394564
+ 367c689a-ca5c-405b-a2c6-a18aef1b8332 | VERIFIED |       1 |              | REQ-d46aa0f89c8d404c9c8eb27a6b394564
+[INFO] Request ID: REQ-79c88f9b0725408a9ceb252c5e54437e
+ c841db56-d904-462f-b188-e613dd6abdbd | VERIFIED |       1 |              | REQ-79c88f9b0725408a9ceb252c5e54437e
+[INFO] Request ID: REQ-b327db6aad564876a086c225d267190f
+ 64fd0db6-1634-4d18-a6c4-e339b271bb68 | VERIFIED |       1 |              | REQ-b327db6aad564876a086c225d267190f
+$ docker compose logs fluent-bit | retry
+[2026/10/28 03:30:32.665380221] [ warn] [engine] failed to flush chunk '1-1793158232.420984497.flb', retry in 8 seconds: task_id=6, input=forward.0 > output=pgsql.0 (out_id=0)
+connection not open
+connection not open
+connection not open
+connection not open
+$ buffer filesystem
+OCI runtime exec failed: exec failed: unable to start container process: exec: "sh": executable file not found in $PATH
+ Container pmb-lab-log-db-1 Started 
+Jumlah record sesudah pemulihan: 108 (naik 15)
+$ metrik Fluent Bit (output pgsql)
+{
+ "pgsql.0": {
+  "proc_records": 108,
+  "proc_bytes": 34664,
+  "errors": 0,
+  "retries": 20,
+  "retries_failed": 16,
+  "dropped_records": 42,
+  "retried_records": 57
+ }
+}
+input: {"forward.0": {"records": 153, "bytes": 49592}, "storage_backlog.1": {"records": 0, "bytes": 0}}

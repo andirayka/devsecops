@@ -19,6 +19,10 @@
 
 Topik ini mengikuti ruang lingkup praktikum. Hasil, klaim, dan kesimpulan setiap bab harus berasal dari pekerjaan serta verifikasi Andi sendiri.
 
+## Aplikasi Axon Sales
+
+Aplikasi UTS kelompok (Next.js + MySQL, CI/CD, SAST, DAST) ada di [`axon/`](axon/). Isinya berasal dari repo `andirayka/uts-devops` dan riwayat commit aslinya ikut tersimpan. Workflow GitHub Actions-nya ada di `.github/workflows/axon-*.yml`: CI berjalan saat `axon/**` berubah, sedangkan deploy ke VPS hanya lewat jalankan manual.
+
 ## Susunan folder
 
 | Lokasi | Isi dan kegunaan |

@@ -1,9 +1,12 @@
-name: CI & Deployment Pipeline
+name: Axon CI & Deployment Pipeline
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "axon/**"
+      - ".github/workflows/axon-ci-deploy.yml"
   workflow_dispatch:
 
 permissions:
@@ -14,6 +17,9 @@ jobs:
   ci:
     name: Run Quality & Test Checks
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: axon
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -23,6 +29,7 @@ jobs:
         with:
           node-version: 24
           cache: "npm"
+          cache-dependency-path: axon/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
@@ -39,7 +46,7 @@ jobs:
       - name: Run SAST Scan
         run: |
           docker run --rm \
-            -v "$GITHUB_WORKSPACE:/src" \
+            -v "$GITHUB_WORKSPACE/axon:/src" \
             -w /src \
             returntocorp/semgrep:latest \
             semgrep scan \
@@ -56,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sast-results
-          path: semgrep-results.json
+          path: axon/semgrep-results.json
           if-no-files-found: ignore
 
       - name: Set up Docker Buildx
@@ -72,8 +79,8 @@ jobs:
       - name: Build and Push Production Image to GHCR
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile.prod
+          context: axon
+          file: axon/Dockerfile.prod
           push: true
           tags: ghcr.io/${{ github.repository }}/app:latest
           cache-from: type=gha
@@ -82,6 +89,7 @@ jobs:
   deploy:
     name: Deploy to Production VPS
     needs: ci
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:

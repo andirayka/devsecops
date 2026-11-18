@@ -1,4 +1,4 @@
-name: DAST Security Scan
+name: Axon DAST Security Scan
 
 on:
   workflow_dispatch:

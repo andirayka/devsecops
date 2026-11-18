@@ -13,7 +13,7 @@ CI job — "Run Quality & Test Checks"  (otomatis)
    ├── Typecheck (tsc)
    ├── Unit test (38 test)
    ├── SAST — Semgrep scan → artifact "sast-results"
-   └── Build & push image ke GHCR (ghcr.io/andirayka/uts-devops/app:latest)
+   └── Build & push image ke GHCR (ghcr.io/andirayka/devsecops/app:latest)
    │
    ▼
 Deploy job — "Deploy to Production VPS"  (otomatis setelah CI hijau)

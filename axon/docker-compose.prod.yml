@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   app:
-    image: ghcr.io/andirayka/uts-devops/app:latest
+    image: ghcr.io/andirayka/devsecops/app:latest
     build:
       context: .
       dockerfile: Dockerfile.prod

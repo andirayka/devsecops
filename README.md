@@ -1,6 +1,6 @@
-# Laporan Praktikum DevSecOps Bab 1–4
+# Laporan Praktikum DevSecOps Bab 1–7
 
-> **Status:** praktikum runtime Bab 1–4 lulus. Empat PDF per bab yang dipublikasikan lulus verifikasi overlap dan pemeriksaan visual; hasil ini mencakup build terbaru setelah revisi Bab 3.
+> **Status:** praktikum runtime Bab 1–7 lulus. Tujuh PDF per bab yang dipublikasikan lulus verifikasi overlap dan pemeriksaan visual. Bab 5 dipulihkan dari branch `tugas-bab-5`; Bab 6 dan Bab 7 dikerjakan berdasarkan materi dosen Pak Ferry (repo `ferryas-pens/devsecops`).
 
 ## Identitas
 
@@ -16,8 +16,18 @@
 2. **Bab 2 — Konsep Container dan Instalasi Docker:** perbedaan VM dan container, arsitektur Docker, instalasi/penggunaan Docker, container dasar, dan custom image.
 3. **Bab 3 — Docker Network, Volume, Bind Mount, dan Compose:** DNS dan segmentasi jaringan, persistensi data, bind mount/tmpfs, serta orkestrasi multi-container dan healthcheck.
 4. **Bab 4 — Web Service Container: Apache, Nginx, Reverse Proxy, dan TLS:** pemisahan layanan web/API, routing reverse proxy, TLS, pengamanan private key, dan pencatatan akses.
+5. **Bab 5 — Database Service di Docker: PostgreSQL:** init script, named volume, constraint, healthcheck, backup/restore dengan pg_dump/pg_restore, dan pgAdmin.
+6. **Bab 6 — Centralized Logging dengan Fluent Bit dan PostgreSQL:** Docker fluentd logging driver, penyimpanan JSONB, korelasi `request_id`, dan ketahanan pipeline saat database log mati.
+7. **Bab 7 — Monitoring Resource: Prometheus, cAdvisor, Node Exporter, Grafana:** scrape metrics, recording/alert rule, dashboard Grafana, uji beban CPU, dan negative test alert `TargetDown`.
 
 Topik ini mengikuti ruang lingkup praktikum. Hasil, klaim, dan kesimpulan setiap bab harus berasal dari pekerjaan serta verifikasi Andi sendiri.
+
+## Materi dosen
+
+Materi ajar Bab 5–7 dari Pak Ferry (repo `ferryas-pens/devsecops`) disalin ke
+[`materi/`](materi/): naskah bab, cheatsheet lab, dan diagram arsitektur. Materi
+ini rujukan; pekerjaan Andi tetap di `lab/babN/`, `evidence/babN/`, dan
+`chapters/babN.md`.
 
 ## Aplikasi Axon Sales
 
@@ -27,11 +37,12 @@ Aplikasi UTS kelompok (Next.js + MySQL, CI/CD, SAST, DAST) ada di [`axon/`](axon
 
 | Lokasi | Isi dan kegunaan |
 | --- | --- |
-| `chapters/bab1.md`–`chapters/bab4.md` | Sumber Markdown untuk generator. Build penuh memerlukan keempat file tidak kosong; build satu bab hanya memerlukan file yang dipilih. |
+| `chapters/bab1.md`–`chapters/bab7.md` | Sumber Markdown untuk generator. Build penuh memerlukan `bab1.md`–`bab4.md`; `--chapter` membangun satu bab saja (termasuk `bab5.md`–`bab7.md`). |
 | `lab/babN/` | Berkas kerja tiap bab, misalnya konfigurasi dan kode/container praktikum. Simpan materi sesuai babnya. |
 | `evidence/babN/` | Bukti milik Andi untuk bab terkait: tangkapan layar dan hasil pemeriksaan yang relevan. Jangan menaruh screenshot orang lain sebagai bukti. |
+| `materi/` | Materi dosen Bab 5–7 (naskah bab, cheatsheet, diagram) dari `ferryas-pens/devsecops`. |
 | `assets/` | Aset laporan, termasuk logo PENS yang sudah tersedia di `assets/logo-pens.png`. |
-| `output/babN/` | Empat PDF per bab yang dihasilkan `build_report.py` dan dipublikasikan. |
+| `output/babN/` | Tujuh PDF per bab yang dihasilkan `build_report.py` dan dipublikasikan. |
 | `output/` | Generator dapat menyimpan PDF gabungan lokal di sini; PDF gabungan sengaja diabaikan dan tidak masuk repo publik. |
 | `renders/` | PNG hasil render verifier (default); artefak render lokal ini diabaikan oleh `.gitignore`. |
 
@@ -39,30 +50,34 @@ Folder `lab/` dan `evidence/` menyimpan konfigurasi serta bukti praktikum milik 
 
 ## Keluaran laporan
 
-PDF yang dipublikasikan adalah empat laporan per bab:
+PDF yang dipublikasikan adalah tujuh laporan per bab:
 
 | PDF | Halaman |
 | --- | ---: |
-| [Laporan Bab 1](output/bab1/3123640021_Andi.pdf) | 7 |
-| [Laporan Bab 2](output/bab2/3123640021_Andi.pdf) | 6 |
-| [Laporan Bab 3](output/bab3/3123640021_Andi.pdf) | 5 |
-| [Laporan Bab 4](output/bab4/3123640021_Andi.pdf) | 4 |
+| [Laporan Bab 1](output/bab1/3126640005_Andi.pdf) | 7 |
+| [Laporan Bab 2](output/bab2/3126640005_Andi.pdf) | 6 |
+| [Laporan Bab 3](output/bab3/3126640005_Andi.pdf) | 5 |
+| [Laporan Bab 4](output/bab4/3126640005_Andi.pdf) | 4 |
+| [Laporan Bab 5](output/bab5/3126640005_Andi.pdf) | 4 |
+| [Laporan Bab 6](output/bab6/3126640005_Andi.pdf) | 5 |
+| [Laporan Bab 7](output/bab7/3126640005_Andi.pdf) | 5 |
 
-Total laporan per bab yang dipublikasikan adalah 22 halaman. Generator tetap mendukung keluaran gabungan sebagai artefak lokal, tetapi bukan bagian dari publikasi ini.
+Total laporan per bab yang dipublikasikan adalah 36 halaman. Generator tetap mendukung keluaran gabungan sebagai artefak lokal, tetapi bukan bagian dari publikasi ini.
 
 ## Lingkungan dan port praktikum
 
 Preflight lokal menemukan Docker Engine siap melalui **Colima dengan Ubuntu 24.04.4 LTS ARM64**. Perintah yang memerlukan lingkungan Linux harus dijalankan di VM tersebut, bukan dianggap berjalan pada kernel macOS host.
-
-Port berikut adalah **rencana pemetaan port host yang diadaptasi**, bukan hasil pengujian:
 
 | Bab | Port host yang direncanakan |
 | --- | --- |
 | 2 | `18082` (Nginx) dan `19092` (custom web) |
 | 3 | `18083` (web) |
 | 4 | `18084` (HTTP) dan `18444` (HTTPS) |
+| 5 | `15432` (PostgreSQL) dan `15050` (pgAdmin) |
+| 6 | `18086` (portal) dan `24225` (Fluent Bit forward) |
+| 7 | `9090` (Prometheus) dan `3000` (Grafana) |
 
-Periksa ketersediaan port sebelum menjalankan stack. Pertahankan container atau stack pengguna yang sudah berjalan; jangan menghentikannya hanya untuk membebaskan port tanpa persetujuan.
+Port Bab 5–7 hanya terikat ke loopback. Periksa ketersediaan port sebelum menjalankan stack. Pertahankan container atau stack pengguna yang sudah berjalan; jangan menghentikannya hanya untuk membebaskan port tanpa persetujuan.
 
 ## Persiapan dan build
 
@@ -81,12 +96,13 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-Bantuan generator telah diperiksa melalui `python3 build_report.py --help`. Build penuh memerlukan `chapters/bab1.md` sampai `chapters/bab4.md` dan menghasilkan satu PDF per bab serta satu PDF gabungan lokal. PDF gabungan tidak dipublikasikan. Opsi `--chapter FILE` membangun satu bab saja tanpa memerlukan tiga bab lainnya:
+Build penuh memerlukan `chapters/bab1.md` sampai `chapters/bab4.md` dan menghasilkan satu PDF per bab serta satu PDF gabungan lokal. Bab 5–7 dibangun mandiri dengan `--chapter`:
 
 ```bash
 python3 build_report.py --help
 python3 build_report.py
-python3 build_report.py --chapter chapters/bab2.md
+python3 build_report.py --chapter chapters/bab5.md
+python3 build_report.py --chapter chapters/bab7.md
 ```
 
 Opsi yang tersedia:
@@ -108,12 +124,10 @@ Verifier memeriksa overlap teks-teks dan teks-gambar di atas `8 pt²`, lalu mere
 python3 verify_report.py
 
 # Contoh memeriksa satu PDF bab dengan folder render terpisah
-python3 verify_report.py output/bab1/3123640021_Andi.pdf renders/bab1
+python3 verify_report.py output/bab7/3126640005_Andi.pdf renders/bab7
 ```
 
-Build terbaru setelah revisi Bab 3: empat PDF per bab yang dipublikasikan lulus pemeriksaan overlap dengan ambang `8 pt²` dan seluruh 22 halaman berhasil dirender. Parent meninjau visual seluruh 9 halaman Bab 3–4 serta PDF Bab 1–2 pada pemeriksaan sebelumnya, termasuk koreksi ASCII Bab 1 halaman 4. Tidak ditemukan overlap, clipping, atau glyph hitam.
-
-Kode verifier saat ini menerima path PDF dan folder render sebagai argumen posisi; `--help` belum tersedia pada verifier.
+Tujuh PDF per bab yang dipublikasikan lulus pemeriksaan overlap dengan ambang `8 pt²` dan seluruh halaman berhasil dirender. Render halaman diperiksa secara visual; tidak ditemukan overlap, clipping, atau glyph hitam.
 
 ## Referensi, provenance, dan privasi
 

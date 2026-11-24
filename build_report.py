@@ -41,11 +41,15 @@ from reportlab.platypus import (
 BASE = Path(__file__).resolve().parent
 DEFAULT_CHAPTERS = BASE / "chapters"
 DEFAULT_OUTPUT_DIR = BASE / "output"
-PDF_FILENAME = "3123640021_Andi.pdf"
+PDF_FILENAME = "3126640005_Andi.pdf"
 LOGO = BASE / "assets" / "logo-pens.png"
 CHAPTERS = (("bab1", "Bab 1"), ("bab2", "Bab 2"), ("bab3", "Bab 3"), ("bab4", "Bab 4"))
-# Bab 6 dibangun mandiri lewat --chapter; build penuh tetap Bab 1-4.
-SINGLE_ONLY = {"bab6": ("Bab 6", "3126640005_Andi.pdf")}
+# Bab 5-7 dibangun mandiri lewat --chapter; build penuh tetap Bab 1-4.
+SINGLE_ONLY = {
+    "bab5": ("Bab 5", "3126640005_Andi.pdf"),
+    "bab6": ("Bab 6", "3126640005_Andi.pdf"),
+    "bab7": ("Bab 7", "3126640005_Andi.pdf"),
+}
 
 PAGE_W, PAGE_H = A4
 MARGIN = 2 * cm
@@ -535,8 +539,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--chapters-dir", type=Path, default=DEFAULT_CHAPTERS)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
-    parser.add_argument("--output", type=Path, help="Path PDF gabungan (default: <output-dir>/3123640021_Andi.pdf)")
-    parser.add_argument("--chapter", type=Path, metavar="FILE", help="Build satu laporan bab saja tanpa memerlukan tiga bab lainnya")
+    parser.add_argument("--output", type=Path, help="Path PDF gabungan (default: <output-dir>/3126640005_Andi.pdf)")
+    parser.add_argument("--chapter", type=Path, metavar="FILE", help="Build satu laporan bab saja tanpa memerlukan file bab lainnya")
     parser.add_argument("--lecturer", help="Dosen pengampu yang telah diverifikasi")
     parser.add_argument("--group", help="Nama/nomor kelompok yang telah diverifikasi")
     parser.add_argument("--academic-year", help="Tahun akademik yang telah diverifikasi")
@@ -561,7 +565,7 @@ def build_pdf(
         str(output_path),
         pagesize=A4,
         title=f"Laporan Praktikum DevSecOps — {report_label}",
-        author="Andi Rayka C (3123640021)",
+        author="Andi Rayka C (3126640005)",
         subject=f"Laporan resmi DevOps — {report_label}",
         creator="build_report.py (ReportLab)",
     )
@@ -594,7 +598,7 @@ def main() -> int:
         chapter_id = chapter_file.stem.casefold()
         chapter_labels = {**dict(CHAPTERS), **{k: v[0] for k, v in SINGLE_ONLY.items()}}
         if chapter_id not in chapter_labels or chapter_file.suffix.casefold() != ".md":
-            raise SystemExit("--chapter harus menunjuk ke bab1.md sampai bab4.md, atau bab6.md.")
+            raise SystemExit("--chapter harus menunjuk ke bab1.md sampai bab7.md.")
         if not chapter_file.is_file():
             raise SystemExit(f"Berkas bab tidak ditemukan: {chapter_file}")
         content = chapter_file.read_text(encoding="utf-8").strip()

@@ -1,0 +1,62 @@
+== Menjalankan PostgreSQL dan pgAdmin ==
+ Container andi-devsecops-bab5-pgadmin-1 Running
+ Container andi-devsecops-bab5-postgres-db-1 Running
+ Container andi-devsecops-bab5-postgres-db-1 Waiting
+ Container andi-devsecops-bab5-postgres-db-1 Healthy
+== Service aktif ==
+NAME                                IMAGE                   COMMAND                  SERVICE       CREATED          STATUS                   PORTS
+andi-devsecops-bab5-pgadmin-1       dpage/pgadmin4:latest   "/entrypoint.sh"         pgadmin       31 minutes ago   Up 31 minutes            443/tcp, 127.0.0.1:15050->80/tcp
+andi-devsecops-bab5-postgres-db-1   postgres:16-alpine      "docker-entrypoint.s…"   postgres-db   5 minutes ago    Up 5 minutes (healthy)   127.0.0.1:15432->5432/tcp
+== Verifikasi schema dan data awal ==
+ id |   nrp    |      name
+----+----------+----------------
+  1 | 31230001 | Mahasiswa Satu
+  2 | 31230002 | Mahasiswa Dua
+  4 | 31230003 | Mahasiswa Tiga
+(3 rows)
+
+== Uji constraint unique menolak NRP duplikat ==
+ERROR:  duplicate key value violates unique constraint "students_nrp_key"
+DETAIL:  Key (nrp)=(31230001) already exists.
+[PASS] Constraint menolak NRP yang sudah digunakan.
+== Uji persistensi setelah container PostgreSQL dibuat ulang ==
+INSERT 0 0
+ Container andi-devsecops-bab5-postgres-db-1 Stopping
+ Container andi-devsecops-bab5-postgres-db-1 Stopped
+Going to remove andi-devsecops-bab5-postgres-db-1
+ Container andi-devsecops-bab5-postgres-db-1 Removing
+ Container andi-devsecops-bab5-postgres-db-1 Removed
+ Container andi-devsecops-bab5-postgres-db-1 Creating
+ Container andi-devsecops-bab5-postgres-db-1 Created
+ Container andi-devsecops-bab5-postgres-db-1 Starting
+ Container andi-devsecops-bab5-postgres-db-1 Started
+[PASS] ID container berubah: 8fefa3d046d7 -> a52db350ab7d.
+[PASS] Data uji tetap ada setelah container PostgreSQL dibuat ulang.
+== Membuat dan memeriksa backup ==
+[PASS] Backup: backup/labdb-20261006T142437Z.dump (3394 byte)
+[PASS] SHA-256: backup/labdb-20261006T142437Z.dump.sha256
+backup/labdb-20261006T142437Z.dump: OK
+== Restore test dan perbandingan isi ==
+[PASS] Checksum backup cocok.
+   nrp    |      name
+----------+----------------
+ 31230001 | Mahasiswa Satu
+ 31230002 | Mahasiswa Dua
+ 31230003 | Mahasiswa Tiga
+(3 rows)
+
+[PASS] Restore terverifikasi pada database terpisah: labdb_restore_test
+== pgAdmin merespons melalui port loopback ==
+[PASS] pgAdmin mengembalikan HTTP 302 pada 127.0.0.1:15050.
+== Image dan volume lab ==
+CONTAINER                           REPOSITORY          TAG                 PLATFORM            IMAGE ID            SIZE                CREATED
+andi-devsecops-bab5-pgadmin-1       dpage/pgadmin4      latest              linux/arm64         c332c5f6dfba        184MB               3 weeks ago
+andi-devsecops-bab5-postgres-db-1   postgres            16-alpine           linux/arm64/v8      721873c34ceb        114MB               2 weeks ago
+DRIVER    VOLUME NAME
+local     andi-devsecops-bab5_pg-data
+local     andi-devsecops-bab5_pgadmin-data
+== Hasil akhir ==
+NAME                                IMAGE                   COMMAND                  SERVICE       CREATED          STATUS                   PORTS
+andi-devsecops-bab5-pgadmin-1       dpage/pgadmin4:latest   "/entrypoint.sh"         pgadmin       31 minutes ago   Up 31 minutes            443/tcp, 127.0.0.1:15050->80/tcp
+andi-devsecops-bab5-postgres-db-1   postgres:16-alpine      "docker-entrypoint.s…"   postgres-db   8 seconds ago    Up 8 seconds (healthy)   127.0.0.1:15432->5432/tcp
+[PASS] Verifikasi Bab 5 selesai. Dump berada di backup/ dan diabaikan Git.

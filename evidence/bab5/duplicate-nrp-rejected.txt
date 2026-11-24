@@ -1,0 +1,2 @@
+ERROR:  duplicate key value violates unique constraint "students_nrp_key"
+DETAIL:  Key (nrp)=(31230001) already exists.

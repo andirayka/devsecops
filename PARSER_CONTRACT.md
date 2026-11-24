@@ -64,7 +64,7 @@ python3 build_report.py --chapter chapters/bab2.md  # satu PDF bab saja
 python3 verify_report.py path/laporan.pdf renders/bab2
 ```
 
-Build penuh menulis `output/bab1/3123640021_Andi.pdf` hingga
-`output/bab4/3123640021_Andi.pdf`, serta `output/3123640021_Andi.pdf`.
+Build penuh menulis `output/bab1/3126640005_Andi.pdf` hingga
+`output/bab4/3126640005_Andi.pdf`, serta `output/3126640005_Andi.pdf`.
 `--chapter FILE` hanya menulis PDF mandiri di `output/babN/`; file sumber tidak
 dipindah atau diubah.

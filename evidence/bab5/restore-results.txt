@@ -1,0 +1,9 @@
+[PASS] Checksum backup cocok.
+   nrp    |      name
+----------+----------------
+ 31230001 | Mahasiswa Satu
+ 31230002 | Mahasiswa Dua
+ 31230003 | Mahasiswa Tiga
+(3 rows)
+
+[PASS] Restore terverifikasi pada database terpisah: labdb_restore_test

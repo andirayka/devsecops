@@ -18,7 +18,7 @@ import pdfplumber
 import pypdfium2 as pdfium
 
 BASE = Path(__file__).resolve().parent
-DEFAULT_PDF = BASE / "output" / "3123640021_Andi.pdf"
+DEFAULT_PDF = BASE / "output" / "3126640005_Andi.pdf"
 DEFAULT_RENDER_DIR = BASE / "renders"
 OVERLAP_LIMIT = 8.0  # pt^2; overlap tepat 8 pt^2 tidak dianggap gagal
 RENDER_DPI = 120

@@ -26,7 +26,7 @@ lab/**/backups/
 /renders/
 
 # Publish per-chapter PDFs only; keep the optional combined PDF local
-/output/3123640021_Andi.pdf
+/output/3126640005_Andi.pdf
 
 # OS metadata
 .DS_Store

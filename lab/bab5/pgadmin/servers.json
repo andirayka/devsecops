@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "PostgreSQL Bab 5",
+      "Group": "Laboratorium DevSecOps",
+      "Host": "postgres-db",
+      "Port": 5432,
+      "MaintenanceDB": "labdb",
+      "Username": "labuser",
+      "SSLMode": "prefer"
+    }
+  }
+}

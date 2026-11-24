@@ -1,0 +1,11 @@
+# Load test (load-generator, cpus=0.50) — 2026-11-24 23:20:25
+
+## Before (series empty expected)
+$ container:cpu_usage_cores:rate1m{name=~".*load-generator.*"} -> series: 0
+
+## After 75 detik
+$ container:cpu_usage_cores:rate1m{name=~".*load-generator.*"}
+  andi-devsecops-bab7-load-generator-1 = 0.4999961169 cores
+
+## ALERTS ContainerHighCPU
+  pending | andi-devsecops-bab7-load-generator-1 = 1

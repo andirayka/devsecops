@@ -1,0 +1,39 @@
+groups:
+  - name: bab7-resource-recording
+    interval: 15s
+    rules:
+      - record: instance:node_cpu_utilisation:ratio_rate5m
+        expr: |
+          1 - avg by (instance) (
+            rate(node_cpu_seconds_total{mode="idle"}[5m])
+          )
+
+      - record: instance:node_memory_utilisation:ratio
+        expr: |
+          1 - (
+            node_memory_MemAvailable_bytes
+            /
+            node_memory_MemTotal_bytes
+          )
+
+      - record: instance:node_filesystem_avail:ratio
+        expr: |
+          node_filesystem_avail_bytes{
+            fstype!~"tmpfs|overlay|squashfs|nsfs"
+          }
+          /
+          node_filesystem_size_bytes{
+            fstype!~"tmpfs|overlay|squashfs|nsfs"
+          }
+
+      - record: container:cpu_usage_cores:rate1m
+        expr: |
+          sum by (name) (
+            rate(container_cpu_usage_seconds_total{name!=""}[1m])
+          )
+
+      - record: container:memory_working_set_bytes:sum
+        expr: |
+          sum by (name) (
+            container_memory_working_set_bytes{name!=""}
+          )

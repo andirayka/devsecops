@@ -1,0 +1,4 @@
+# promtool test rules — 2026-11-24 23:18:43
+$ docker compose run --rm --no-deps --entrypoint /bin/promtool prometheus test rules /etc/prometheus/tests/rules.test.yml
+  SUCCESS
+

@@ -1,0 +1,12 @@
+# Negative test TargetDown — 2026-11-24 23:22:21
+
+## Setelah node-exporter dihentikan ~80 detik
+$ up{job="node-exporter"}
+   node-exporter:9100 = 0
+
+$ ALERTS{alertname="TargetDown"}
+   firing | node-exporter:9100 = 1
+
+## Setelah node-exporter dinyalakan kembali (~25 detik)
+$ up{job="node-exporter"}
+   node-exporter:9100 = 1

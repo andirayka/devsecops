@@ -1,0 +1,24 @@
+[PASS] Prometheus siap: http://127.0.0.1:9090/-/ready
+[PASS] Grafana siap: http://127.0.0.1:3000/api/health
+[PASS] Sedikitnya tiga target berstatus up.
+[PASS] PromQL valid: up
+[PASS] PromQL valid: instance:node_cpu_utilisation:ratio_rate5m
+[PASS] PromQL valid: instance:node_memory_utilisation:ratio
+[PASS] PromQL valid: container_memory_working_set_bytes
+Checking /etc/prometheus/prometheus.yml
+  SUCCESS: 2 rule files found
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+
+Checking /etc/prometheus/rules/recording-rules.yml
+  SUCCESS: 5 rules found
+
+Checking /etc/prometheus/rules/alert-rules.yml
+  SUCCESS: 5 rules found
+
+Checking /etc/prometheus/rules/recording-rules.yml
+  SUCCESS: 5 rules found
+
+Checking /etc/prometheus/rules/alert-rules.yml
+  SUCCESS: 5 rules found
+
+[PASS] Verifikasi dasar stack selesai.

@@ -1,0 +1,53 @@
+groups:
+  - name: bab7-resource-alerts
+    interval: 15s
+    rules:
+      - alert: TargetDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: warning
+          category: availability
+        annotations:
+          summary: "Target {{ $labels.instance }} tidak dapat discrape"
+          description: "Job {{ $labels.job }} gagal discrape selama sedikitnya satu menit."
+
+      - alert: HostHighCPU
+        expr: instance:node_cpu_utilisation:ratio_rate5m > 0.90
+        for: 5m
+        labels:
+          severity: warning
+          category: saturation
+        annotations:
+          summary: "Utilisasi CPU host melampaui 90 persen"
+          description: "Nilai saat ini adalah {{ $value | humanizePercentage }}."
+
+      - alert: HostLowAvailableMemory
+        expr: instance:node_memory_utilisation:ratio > 0.90
+        for: 5m
+        labels:
+          severity: warning
+          category: saturation
+        annotations:
+          summary: "Memori host yang digunakan melampaui 90 persen"
+          description: "Nilai saat ini adalah {{ $value | humanizePercentage }}."
+
+      - alert: ContainerHighCPU
+        expr: container:cpu_usage_cores:rate1m > 0.30
+        for: 1m
+        labels:
+          severity: info
+          category: saturation
+        annotations:
+          summary: "Container {{ $labels.name }} memakai CPU tinggi"
+          description: "Rata-rata satu menit adalah {{ $value }} core CPU."
+
+      - alert: PrometheusRuleEvaluationFailure
+        expr: increase(prometheus_rule_evaluation_failures_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+          category: monitoring
+        annotations:
+          summary: "Evaluasi rule Prometheus mengalami kegagalan"
+          description: "Periksa status rule, ekspresi PromQL, dan log Prometheus."

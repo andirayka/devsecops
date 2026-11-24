@@ -1,0 +1,26 @@
+# PromQL queries — 2026-11-24 23:18:24
+=== up ===
+status: success | series: 3
+  {'__name__': 'up', 'instance': 'prometheus:9090', 'job': 'prometheus'} = 1
+  {'__name__': 'up', 'instance': 'cadvisor:8080', 'job': 'cadvisor'} = 1
+  {'__name__': 'up', 'instance': 'node-exporter:9100', 'job': 'node-exporter'} = 1
+=== instance:node_cpu_utilisation:ratio_rate5m ===
+status: success | series: 1
+  {'__name__': 'instance:node_cpu_utilisation:ratio_rate5m', 'instance': 'node-exporter:9100'} = 0.7698621326
+=== instance:node_memory_utilisation:ratio ===
+status: success | series: 1
+  {'__name__': 'instance:node_memory_utilisation:ratio', 'instance': 'node-exporter:9100', 'job': 'node-exporter'} = 0.1779106848
+=== topk(5, container:cpu_usage_cores:rate1m) ===
+status: success | series: 5
+  {'__name__': 'container:cpu_usage_cores:rate1m', 'name': 'andi-devsecops-bab7-cadvisor-1'} = 0.0427180632
+  {'__name__': 'container:cpu_usage_cores:rate1m', 'name': 'pmb-lab-auth-service-1'} = 0.0299092465
+  {'__name__': 'container:cpu_usage_cores:rate1m', 'name': 'pmb-lab-registration-api-1'} = 0.0292670862
+  {'__name__': 'container:cpu_usage_cores:rate1m', 'name': 'andi-devsecops-bab7-grafana-1'} = 0.0149898155
+  {'__name__': 'container:cpu_usage_cores:rate1m', 'name': 'pmb-lab-app-db-1'} = 0.0088319309
+=== topk(5, container:memory_working_set_bytes:sum) ===
+status: success | series: 5
+  {'__name__': 'container:memory_working_set_bytes:sum', 'name': 'andi-devsecops-bab7-grafana-1'} = 191201280
+  {'__name__': 'container:memory_working_set_bytes:sum', 'name': 'andi-devsecops-bab7-prometheus-1'} = 126857216
+  {'__name__': 'container:memory_working_set_bytes:sum', 'name': 'pmb-lab-registration-api-1'} = 90284032
+  {'__name__': 'container:memory_working_set_bytes:sum', 'name': 'pmb-lab-auth-service-1'} = 71479296
+  {'__name__': 'container:memory_working_set_bytes:sum', 'name': 'pmb-lab-verification-worker-1'} = 49201152

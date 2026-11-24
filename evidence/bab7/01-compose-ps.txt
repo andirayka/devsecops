@@ -1,0 +1,5 @@
+NAME                                  SERVICE         STATUS                    PORTS
+andi-devsecops-bab7-cadvisor-1        cadvisor        Up 11 minutes (healthy)   8080/tcp
+andi-devsecops-bab7-grafana-1         grafana         Up 11 minutes             127.0.0.1:3000->3000/tcp
+andi-devsecops-bab7-node-exporter-1   node-exporter   Up 6 minutes              9100/tcp
+andi-devsecops-bab7-prometheus-1      prometheus      Up 11 minutes             127.0.0.1:9090->9090/tcp
